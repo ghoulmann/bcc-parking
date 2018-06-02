@@ -1,17 +1,30 @@
 <!-- app/templates/base.html -->
 
+<!-- In the head tag, include link to Font Awesome CSS so we can use icons -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 <!-- Modify nav bar menu -->
 <ul class="nav navbar-nav navbar-right">
-    <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
-    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+    {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+      <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>
+    {% else %}
+      <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
+      <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+      <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+    {% endif %}
 </ul>
 
 <!-- Modify footer menu -->
 <ul class="list-inline">
     <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
     <li class="footer-menu-divider">⋅</li>
-    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-    <li class="footer-menu-divider">⋅</li>
-    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+    {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+      <li class="footer-menu-divider">⋅</li>
+      <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+    {% endif %}
 </ul>
