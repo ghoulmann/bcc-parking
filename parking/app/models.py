@@ -7,7 +7,7 @@ from app import db, login_manager
 
 class User(UserMixin, db.Model):
     """
-    Create an Employee table
+    Create an User table
     """
 
     # Ensures table will be named in plural and not in singular
