@@ -1,7 +1,11 @@
-from flask import Flask
-from flask_bootstrap import Bootstrap
-app = Flask(__name__)
+# run.py
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+import os
+
+from app import create_app
+
+config_name = os.getenv('FLASK_CONFIG')
+app = create_app(config_name)
+
+if __name__ == '__main__':
+    app.run()
