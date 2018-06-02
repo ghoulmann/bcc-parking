@@ -16,7 +16,7 @@ login_manager = LoginManager()
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
-    app.config.from_pyfile('config.py')
+    app.config.from_pyfile('../config.py')
 
     Bootstrap(app)
     db.init_app(app)
@@ -25,7 +25,7 @@ def create_app(config_name):
     login_manager.login_view = "auth.login"
     migrate = Migrate(app, db)
 
-    from app import models
+    from parking.app import models
 
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
